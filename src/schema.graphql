@@ -1,0 +1,33 @@
+type Query{
+    users:[User!]!
+    login1(email:String!,password:String!):User!
+    todosUser(idUser:Int):[Todo]!
+    listUsersGrupo(grupoId:Int):[User]!
+}
+type Mutation{
+    createUser(nombre:String!,email:String!,password:String!):User!
+    createTodoItem(nombre:String!,userId:Int): Todo!
+    changeGroupUser(userId:ID!,grupoId:ID!):User
+    login(email:String!,password:String!):User!
+    completeTodo(id:Int!,completado:Boolean!):Todo!
+    deleteTodo(id:Int!):Todo
+}
+type Subscription{
+    addTodo(groupId:Int):Todo
+    todoRecived:Todo
+}
+type User{
+    id:ID!,
+    nombre:String!,
+    email:String!,
+    password:String!,
+    todos:[Todo]!
+    token:String
+}
+type Todo{
+    id:ID!,
+    nombre:String!,
+    completado:Boolean!,
+    eliminado:Boolean!,
+    user:User!
+}
